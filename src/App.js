@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import {printHelloWorld} from './actions/printHelloAction'
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  printHelloWorld = () => {
+    // this.props.hello()
+    console.log(this.props);
+    this.props.hello();
+  }
+
+  render() {
+    console.log(this.props)
+    return (
+      <div className="App">
+        <button onClick={this.printHelloWorld}> click </button>
+        {this.props.message}
+      </div>
+    );
+  }
 }
 
-export default App;
+const mapActionsToProps = {
+  hello: printHelloWorld
+}
+
+const mapStateToProps=(state) => {
+  console.log(`mapStateToProps => ${JSON.stringify(state.data)}`)
+  return {message:state.data.message}
+}
+
+export default connect(mapStateToProps, mapActionsToProps)(App);
