@@ -5,13 +5,12 @@ import './App.css';
 
 class App extends Component {
   printHelloWorld = () => {
-    // this.props.hello()
-    console.log(this.props);
+    console.log('methode class call')
     this.props.hello();
   }
 
   render() {
-    console.log(this.props)
+    console.log('this.props', this.props)
     return (
       <div className="App">
         <button onClick={this.printHelloWorld}> click </button>
